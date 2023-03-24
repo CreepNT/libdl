@@ -55,7 +55,7 @@ u128 randVector(float unitLen);
  * RETURN :
  * 
  */
-u128 randVectorRangeNeg(float min, float max);
+u128 RangeNeg(float min, float max);
 
 /*
  * NAME :		randVectorRange

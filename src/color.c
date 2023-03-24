@@ -1,8 +1,8 @@
 #include "game.h"
 #include "color.h"
 
-u32 internal_colorLerp_inGame(u32, u32, float);
-u32 internal_colorLerp_inLobby(u32, u32, float);
+u32 FastTweenColor_inGame(u32, u32, float);
+u32 FastTweenColor_inLobby(u32, u32, float);
 
 /*
  * NAME :		colorLerp
@@ -25,11 +25,11 @@ u32 colorLerp(u32 a, u32 b, float t)
 {
     if (isInGame())
     {
-        return internal_colorLerp_inGame(a, b, t);
+        return FastTweenColor_inGame(a, b, t);
     }
     else if (isInMenus())
     {
-        return internal_colorLerp_inLobby(a, b, t);
+        return FastTweenColor_inLobby(a, b, t);
     }
 
     return a;

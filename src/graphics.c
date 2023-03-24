@@ -1,23 +1,34 @@
 #include "graphics.h"
 #include "game.h"
 
-int internal_drawFunc_inGame(u32,const char*,long,u64,u64,u64,float,float,float,float,float,float);
-int internal_drawFunc_inLobby(u32,const char*,long,u64,u64,u64,float,float,float,float,float,float);
-int internal_widthFunc_inGame(const char*,long,float);
-int internal_widthFunc_inLobby(const char*,long,float);
-void internal_drawBox_inGame(void *, void *);
-void internal_drawBox_inLobby(void *, void *);
+typedef struct {
+    int iUsing;
+    int iIcon;
+    void* pImage;
+    float fShadowX;
+    float fShadowY;
+    uint iShadowColor;
+    uint vColors[4];
+    int fFade; //should be float!
+} /* IGE::DRIVER::PS2:: */ DrawParams;
 
-void internal_doGifPaging_inGame(void);
-void internal_doGifPaging_inLobby(void);
-void internal_setupGifPaging_inGame(int);
-void internal_setupGifPaging_inLobby(int);
-u64 internal_getFrameTex_inGame(int id);
-u64 internal_getFrameTex_inLobby(int id);
-u64 internal_getEffectTex_inGame(int id, int);
-u64 internal_getEffectTex_inLobby(int id, int);
-void internal_drawSprite_inGame(float x, float y, float w, float h, int t0, int t1, int texW, int texH, u64 color, u64 texture);
-void internal_drawSprite_inLobby(float x, float y, float w, float h, int t0, int t1, int texW, int texH, u64 color, u64 texture);
+int FontPrint_inGame(u32,const char*,long,u64,u64,u64,float,float,float,float,float,float);
+int FontPrint_inLobby(u32,const char*,long,u64,u64,u64,float,float,float,float,float,float);
+int FontStringLength_inGame(const char*,long,float);
+int FontStringLength_inLobby(const char*,long,float);
+void DrawQuad_inGame(void *, DrawParams *);
+void DrawQuad_inLobby(void *, DrawParams *);
+
+void DoGifPaging_inGame(void);
+void DoGifPaging_inLobby(void);
+void SetupGifPaging_inGame(int);
+void SetupGifPaging_inLobby(int);
+u64 GetFrameTex_inGame(int id);
+u64 GetFrameTex_inLobby(int id);
+u64 GetEffectTex_inGame(int id, int);
+u64 GetEffectTex_inLobby(int id, int);
+void DrawSprite_inGame(float x, float y, float w, float h, int t0, int t1, int texW, int texH, u64 color, u64 texture);
+void DrawSprite_inLobby(float x, float y, float w, float h, int t0, int t1, int texW, int texH, u64 color, u64 texture);
 
 
 //--------------------------------------------------------
@@ -125,11 +136,11 @@ int gfxGetFontWidth(const char * string, int length, float scale)
 {
     if (isInGame())
     {
-        return internal_widthFunc_inGame(string, length, scale);
+        return FontStringLength_inGame(string, length, scale);
     }
     else if (isInMenus())
     {
-        return internal_widthFunc_inLobby(string, length, scale);
+        return FontStringLength_inLobby(string, length, scale);
     }
 
     return 0;
@@ -141,13 +152,13 @@ int gfxScreenSpaceText(float x, float y, float scaleX, float scaleY, u32 color, 
     // draw
     if (isInGame())
     {
-        internal_drawFunc_inGame(color, string, length, alignment, 0, 0x80000000, x, y, scaleX, scaleY, 0, 0);
-        return x + internal_widthFunc_inGame(string, length, scaleX);
+        FontPrint_inGame(color, string, length, alignment, 0, 0x80000000, x, y, scaleX, scaleY, 0, 0);
+        return x + FontStringLength_inGame(string, length, scaleX);
     }
     else if (isInMenus())
     {
-        internal_drawFunc_inLobby(color, string, length, alignment, 0, 0x80000000, x, y, scaleX, scaleY, 0, 0);
-        return x + internal_widthFunc_inLobby(string, length, scaleX);
+        FontPrint_inLobby(color, string, length, alignment, 0, 0x80000000, x, y, scaleX, scaleY, 0, 0);
+        return x + FontStringLength_inLobby(string, length, scaleX);
     }
 
     return 0;
@@ -156,26 +167,29 @@ int gfxScreenSpaceText(float x, float y, float scaleX, float scaleY, u32 color, 
 //--------------------------------------------------------
 void gfxScreenSpaceQuad(RECT * rect, u32 colorTL, u32 colorTR, u32 colorBL, u32 colorBR)
 {
-    u32 buffer[11];
-    buffer[0] = 8;
-    buffer[1] = 0;
-    buffer[2] = 0x005C97AC;
-    buffer[3] = 0;
-    buffer[4] = 0;
-    buffer[5] = 0xBE130000;
-    buffer[6] = colorTL;
-    buffer[7] = colorTR;
-    buffer[8] = colorBL;
-    buffer[9] = colorBR;
-    buffer[10] = 2;
+    DrawParams dp;
+    dp.iUsing = 8;
+    dp.iIcon = 0;
+    
+    //TODO: port offset for PAL!
+    dp.pImage = 0x005C97AC;
+
+    dp.fShadowX = 0.0f;
+    dp.fShadowY = 0.0f;
+    dp.iShadowColor = 0xBE130000;
+    dp.vColors[0] = colorTL;
+    dp.vColors[1] = colorTR;
+    dp.vColors[2] = colorBL;
+    dp.vColors[3] = colorBR;
+    dp.fFade = 2;
 
     if (isInGame())
     {
-        internal_drawBox_inGame(rect, buffer);
+        DrawQuad_inGame(rect, buffer);
     }
     else if (isInMenus())
     {
-        internal_drawBox_inLobby(rect, buffer);
+        DrawQuad_inLobby(rect, buffer);
     }
 }
 
@@ -208,6 +222,8 @@ void gfxScreenSpacePIF(RECT * rect)
     u32 buffer[11];
     int inGame = isInGame();
     int inMenus = isInMenus();
+
+    //TODO: port to PAL!
     u32 pifAddr = inGame ? 0x01E72C00 : 0x0036DED0;
     
     buffer[0] = 0x8;
@@ -223,9 +239,9 @@ void gfxScreenSpacePIF(RECT * rect)
     buffer[10] = 0x8;
 
     if (inGame)
-        internal_drawBox_inGame(rect, buffer);
+        DrawQuad_inGame(rect, buffer);
     else if (inMenus)
-        internal_drawBox_inLobby(rect, buffer);
+        DrawQuad_inLobby(rect, buffer);
 
     buffer[0] = 0x9;
     buffer[1] = 0;
@@ -240,32 +256,32 @@ void gfxScreenSpacePIF(RECT * rect)
     buffer[10] = 0xE;
 
     if (inGame)
-        internal_drawBox_inGame(rect, buffer);
+        DrawQuad_inGame(rect, buffer);
     else if (inMenus)
-        internal_drawBox_inLobby(rect, buffer);
+        DrawQuad_inLobby(rect, buffer);
 }
 
 void gfxDoGifPaging(void)
 {
     if (isInGame())
     {
-        internal_doGifPaging_inGame();
+        DoGifPaging_inGame();
     }
     else if (isInMenus())
     {
-        internal_doGifPaging_inLobby();
+        DoGifPaging_inLobby();
     }
 }
 
-void gfxSetupGifPaging(int a0)
+void gfxSetupGifPaging(int no_hud)
 {
     if (isInGame())
     {
-        internal_setupGifPaging_inGame(a0);
+        SetupGifPaging_inGame(no_hud);
     }
     else if (isInMenus())
     {
-        internal_setupGifPaging_inLobby(a0);
+        SetupGifPaging_inLobby(no_hud);
     }
 }
 
@@ -273,11 +289,11 @@ u64 gfxGetFrameTex(int id)
 {
     if (isInGame())
     {
-        return internal_getFrameTex_inGame(id);
+        return GetFrameTex_inGame(id);
     }
     else if (isInMenus())
     {
-        return internal_getFrameTex_inLobby(id);
+        return GetFrameTex_inLobby(id);
     }
 
     return 0;
@@ -287,11 +303,11 @@ u64 gfxGetEffectTex(int id, int a1)
 {
     if (isInGame())
     {
-        return internal_getEffectTex_inGame(id, a1);
+        return GetEffectTex_inGame(id, a1);
     }
     else if (isInMenus())
     {
-        return internal_getEffectTex_inLobby(id, a1);
+        return GetEffectTex_inLobby(id, a1);
     }
     
     return 0;
@@ -301,10 +317,10 @@ void gfxDrawSprite(float x, float y, float w, float h, int t0, int t1, int texW,
 {
     if (isInGame())
     {
-        internal_drawSprite_inGame(x, y, w, h, t0, t1, texW, texH, color, texture);
+        DrawSprite_inGame(x, y, w, h, t0, t1, texW, texH, color, texture);
     }
     else if (isInMenus())
     {
-        internal_drawSprite_inLobby(x, y, w, h, t0, t1, texW, texH, color, texture);
+        DrawSprite_inLobby(x, y, w, h, t0, t1, texW, texH, color, texture);
     }
 }

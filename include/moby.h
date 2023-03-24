@@ -483,7 +483,7 @@ typedef struct MobyColDamageIn {
     int UNK_2C;
 } MobyColDamageIn;
 
-typedef struct MobyColDamage {
+typedef struct MobyColDamage { //COLL_DAM_OUT
     VECTOR Ip;
     VECTOR Momentum;
     Moby* Damager;

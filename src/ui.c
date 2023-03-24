@@ -7,8 +7,8 @@
 int internal_uiDialog(void *, const char *, const char *, int, int, int, int);
 int internal_uiSelectDialog(void *, const char *, const char **, int, int, int, int);
 int internal_uiInputDialog(void *, const char *, char *, int, int, int, int, int, int);
-char * internal_uiMsgString_inGame(int textId);
-char * internal_uiMsgString_inLobby(int textId);
+char * msg_string_inGame(int textId);
+char * msg_string_inLobby(int textId);
 
 int uiGetActive(void)
 {
@@ -38,9 +38,9 @@ int uiShowInputDialog(const char * title, char * value, int maxLength)
 char * uiMsgString(int textId)
 {
     if (isInGame())
-        return internal_uiMsgString_inGame(textId);
+        return msg_string_inGame(textId);
     else if (isInMenus())
-        return internal_uiMsgString_inLobby(textId);
+        return msg_string_inLobby(textId);
 
     return NULL;
 }

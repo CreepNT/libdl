@@ -1,0 +1,6 @@
+LIBDL_SUFFIX = _pal
+
+EE_INCS += -I./games/pal
+EE_DEFS = -DLIBDL_PAL=1
+
+include Makefile.defs

@@ -10,8 +10,8 @@
 #define MATH_FABSF_FUNC                 (0x00135960)
 #define MATH_FMOD_FUNC                  (0x00135C18)
 
-float internal_fastmodf_inLobby(float x, float y);
-float internal_fastmodf_inGame(float x, float y);
+float FastMod_inLobby(float x, float y);
+float FastMod_inGame(float x, float y);
 
 //--------------------------------------------------------
 // -- https://stackoverflow.com/a/28050328
@@ -154,9 +154,9 @@ float sqrtf(float f)
 float fastmodf(float x, float y)
 {
     if (isInGame())
-        return internal_fastmodf_inGame(x, y);
+        return FastMod_inGame(x, y);
     if (isInMenus())
-        return internal_fastmodf_inLobby(x, y);
+        return FastMod_inLobby(x, y);
     
     return x;
 }

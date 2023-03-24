@@ -2,6 +2,13 @@
 
 Small C library for developing integrated programs for Ratchet Deadlocked PS2
 
+## Multi-version support
+
+* `#define LIBDL_PAL` for PAL (ISO SHA1: ``)
+* `#define LIBDL_NTSC_U` for NTSC-U (ISO SHA1: ``)
+
+**TODO:** automate detection of missing _ADDROF symbols.
+
 ## Building
 
 Building libdl requires an installation of the open source PS2SDK. I recommend using a prebuilt docker image.

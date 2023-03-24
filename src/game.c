@@ -1,7 +1,7 @@
 #include "game.h"
 
 
-void internal_gameEnd(int);
+void GB_GameControllerSessionMasterEndGame(int);
 
 /*
  * 
@@ -103,7 +103,7 @@ void gameSetWinner(int teamOrPlayerId, int isTeam)
 void gameEnd(int reason)
 {
     if (!gameHasEnded())
-        internal_gameEnd(reason);
+        GB_GameControllerSessionMasterEndGame(reason);
 }
 
 int gameIsHost(int hostId)

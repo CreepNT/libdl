@@ -13,9 +13,9 @@
 #define HUD_P2			((PlayerHUDFlags*)0x0030D8F0)
 
 
-void* internal_hudGetCanvas_inGame(u32 canvas);
-u32 internal_hudGetCurrentCanvas_inGame(void);
-struct HUDObject* internal_hudCanvasGetObject_inGame(void* canvas, u32 objId);
+void* GetCanvas(u32 canvas);
+u32 GetCurrentCanvas(void);
+struct HUDObject* Canvas_GetObject(void* canvas, u32 objId);
 
 
 PlayerHUDFlags * hudGetPlayerFlags(int localPlayerIndex)
@@ -31,7 +31,7 @@ PlayerHUDFlags * hudGetPlayerFlags(int localPlayerIndex)
 void* hudGetCanvas(u32 canvas)
 {
     if (isInGame()) {
-        return internal_hudGetCanvas_inGame(canvas);
+        return GetCanvas(canvas);
     }
 
     return NULL;
@@ -40,7 +40,7 @@ void* hudGetCanvas(u32 canvas)
 u32 hudGetCurrentCanvas(void)
 {
     if (isInGame()) {
-        return internal_hudGetCurrentCanvas_inGame();
+        return GetCurrentCanvas();
     }
 
     return NULL;
@@ -49,7 +49,7 @@ u32 hudGetCurrentCanvas(void)
 struct HUDObject* hudCanvasGetObject(void* canvas, u32 objId)
 {
     if (isInGame()) {
-        return internal_hudCanvasGetObject_inGame(canvas, objId);
+        return Canvas_GetObject(canvas, objId);
     }
 
     return NULL;

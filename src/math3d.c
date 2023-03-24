@@ -14,7 +14,7 @@
 # Review ps2sdk README & LICENSE files for further details.
 */
 
-u128 internal_vectorReflect(u128 input, u128 normal);
+u128 VecReflect3(u128 input, u128 normal);
 
 //--------------------------------------------------------
 void vector_write(VECTOR output, u128 input0)
@@ -31,7 +31,7 @@ u128 vector_read(VECTOR input0)
 //--------------------------------------------------------
 void vector_reflect(VECTOR output, VECTOR input0, VECTOR normal)
 {
-    vector_write(output, internal_vectorReflect(vector_read(input0), vector_read(normal)));
+    vector_write(output, VecReflect3(vector_read(input0), vector_read(normal)));
 }
 
 //--------------------------------------------------------

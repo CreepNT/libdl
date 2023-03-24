@@ -1,0 +1,6 @@
+LIBDL_SUFFIX = 
+
+EE_INCS += -I./games/ntsc_u
+EE_DEFS = -DLIBDL_NTSC_U=1
+
+include Makefile.defs

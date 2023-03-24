@@ -164,7 +164,7 @@ void gfxScreenSpacePIF(RECT * rect);
 int gfxGetFontWidth(const char * string, int length, float scale);
 
 void gfxDoGifPaging(void);
-void gfxSetupGifPaging(int);
+void gfxSetupGifPaging(int no_hud);
 u64 gfxGetFrameTex(int id);
 u64 gfxGetEffectTex(int id, int);
 void gfxDrawSprite(float x, float y, float w, float h, int t0, int t1, int texW, int texH, u64 color, u64 texture);
@@ -172,6 +172,6 @@ void gfxDrawSprite(float x, float y, float w, float h, int t0, int t1, int texW,
 void gfxDrawCubicLine(void * fxUtilsInterface, CubicLineEndPoint * points, int numPoints, void * cubicLineStatic, float scale);
 void gfxDrawQuad(void * fxRegistrySystemInterface, struct QuadDef * quadDef, MATRIX worldMatrix, u32 a3);
 void gfxResetQuad(struct QuadDef * quadDef);
-void gfxRegisterDrawFunction(void ** a0, gfxDrawFuncDef * callback, Moby* moby);
+void gfxRegisterDrawFunction(void ** pVoidHeader, gfxDrawFuncDef * drawFun, Moby* pMoby);
 
 #endif // _LIBDL_GRAPHICS_H_

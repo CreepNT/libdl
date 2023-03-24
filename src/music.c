@@ -2,17 +2,17 @@
 #include "music.h"
 
 //--------------------------------------------------------
-void internal_musicPlayTrack_inGame(u64, u64, u64);
-void internal_musicPlayTrack_inLobby(u64, u64, u64);
-void internal_musicStopTrack_inGame(void);
-void internal_musicStopTrack_inLobby(void);
-void internal_musicPauseTrack_inGame(u64);
-void internal_musicPauseTrack_inLobby(u64);
-void internal_musicUnpauseTrack_inGame(void);
-void internal_musicUnpauseTrack_inLobby(void);
-void internal_musicTransitionTrack_inGame(u64, u64, u64, u64);
-void internal_musicTransitionTrack_inLobby(u64, u64, u64, u64);
-void internal_wadGetSectors(u64, u64, u64);
+void music_StartTrack_inGame(u64, u64, u64);
+void music_StartTrack_inLobby(u64, u64, u64);
+void music_Stop_inGame(void);
+void music_Stop_inLobby(void);
+void music_Pause_inGame(u64);
+void music_Pause_inLobby(u64);
+void music_Unpause_inGame(void);
+void music_Unpause_inLobby(void);
+void music_Transition_inGame(u64, u64, u64, u64);
+void music_Transition_inLobby(u64, u64, u64, u64);
+void wad_GetSectors(u64, u64, u64);
 
 /*
  * Games music volume setting.
@@ -49,11 +49,11 @@ void musicPlayTrack(int TrackNumber, int KeepPlaying)
     musicStopTrack();
     if (isInGame())
     {
-        internal_musicPlayTrack_inGame(TrackNumber, KeepPlaying, 0x400);
+        music_StartTrack_inGame(TrackNumber, KeepPlaying, 0x400);
     }
     else if (isInMenus())
     {
-        internal_musicPlayTrack_inLobby(TrackNumber, KeepPlaying, 0x400);
+        music_StartTrack_inLobby(TrackNumber, KeepPlaying, 0x400);
     }
 }
 
@@ -62,11 +62,11 @@ void musicStopTrack(void)
 {
     if (isInGame())
     {
-        internal_musicStopTrack_inGame();
+        music_Stop_inGame();
     }
     else if (isInMenus())
     {
-        internal_musicStopTrack_inLobby();
+        music_Stop_inLobby();
     }
 }
 
@@ -75,11 +75,11 @@ void musicPauseTrack(int arg1)
 {
     if (isInGame())
     {
-        internal_musicPauseTrack_inGame(arg1);
+        music_Pause_inGame(arg1);
     }
     else if (isInMenus())
     {
-        internal_musicPauseTrack_inLobby(arg1);
+        music_Pause_inLobby(arg1);
     }
 }
 
@@ -88,11 +88,11 @@ void musicUnpauseTrack(void)
 {
     if (isInGame())
     {
-        internal_musicUnpauseTrack_inGame();
+        music_Unpause_inGame();
     }
     else if (isInMenus())
     {
-        internal_musicUnpauseTrack_inLobby();
+        music_Unpause_inLobby();
     }
 }
 
@@ -101,11 +101,11 @@ void musicTransitionTrack(short arg1, short CueTrack, short arg3, short arg4)
 {
     if (isInGame())
     {
-        internal_musicTransitionTrack_inGame(arg1, CueTrack, arg3, arg4);
+        music_Transition_inGame(arg1, CueTrack, arg3, arg4);
     }
     else if (isInMenus())
     {
-        internal_musicTransitionTrack_inLobby(arg1, CueTrack, arg3, arg4);
+        music_Transition_inLobby(arg1, CueTrack, arg3, arg4);
     }
 }
 
