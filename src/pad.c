@@ -3,6 +3,8 @@
 #include "game.h"
 #include "player.h"
 
+//TODO: port me
+
 #define PAD_POINTER                         ((PadButtonStatus**)0x0021DDCC)
 #define P1_PAD                              ((PadButtonStatus*)(0x001EE600 + 0x574))
 #define P2_PAD                              ((PadButtonStatus*)(0x001EFD00 + 0x574))

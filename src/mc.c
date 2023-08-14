@@ -2,6 +2,8 @@
 #include <kernel.h>
 #include "string.h"
 
+//TODO: port me
+
 #define MC_SEMA                         (*(u32*)0x00167BFC)
 #define MC_RESULT                       (*(s32*)0x001AEE40)
 

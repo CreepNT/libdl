@@ -1,5 +1,7 @@
 #include "moby.h"
 
+//TODO: port me
+
 //--------------------------------------------------------
 #define SPAWN_MOBY_FUNC                         (0x004F7200)
 #define BEGIN_MOBY_PTR                          ((Moby**)0x00222794)

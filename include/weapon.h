@@ -338,9 +338,6 @@ void weaponTurnOnHoloshields(int team);
  *          Always call this after you are done using weaponTurnOnHoloshields().
  * 
  * ARGS : 
- *      weaponId        :           Target weapon.
- *      level           :           Target weapon level.
- *      damage          :           Target damage.
  * 
  * RETURN :
  * 

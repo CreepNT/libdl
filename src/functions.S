@@ -142,8 +142,8 @@ FUNCTION(mobySpawnExplosion)
 #--------------------------------------------------------
 #-------------------------- NET -------------------------
 #--------------------------------------------------------
-FUNCTION(internal_netSendMessage)
-FUNCTION(internal_netSendAppMessage)
+FUNCTION(NetSendMessage)
+FUNCTION(NetSendAppMessage)
 FUNCTION(internal_netUpdatetNWGameSettings)
 FUNCTION(netSetSendAggregationInterval)
 
@@ -170,7 +170,7 @@ FUNCTION(playerEquipWeapon)
 FUNCTION(playerRespawn)
 FUNCTION(playerDropFlag)
 FUNCTION(playerGetFromUID)
-FUNCTION(internal_playerSetPosRot)
+FUNCTION(Hero_Warp)
 FUNCTION(playerIncHealth)
 FUNCTION(playerDecHealth)
 FUNCTION(playerGetFromSlot)
@@ -259,8 +259,6 @@ FUNCTION(soundKillById)
 #------------------------- HELP -------------------------
 #--------------------------------------------------------
 FUNCTION(GetMapName)
-FUNCTION(internal_helpGetString_inLobby)
-FUNCTION(internal_helpGetString_inGame)
 
 #--------------------------------------------------------
 #------------------------- SIF --------------------------

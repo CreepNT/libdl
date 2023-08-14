@@ -1,5 +1,7 @@
 #include "guber.h"
 
+//TODO: port me
+
 //--------------------------------------------------------
 #define FIRST_GUBER_MOBY_PTR                         ((GuberMoby**)0x00220710)
 

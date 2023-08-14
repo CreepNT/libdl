@@ -17,8 +17,10 @@
 //--------------------------------------------------------
 //------------------------ DIALOG ------------------------
 //--------------------------------------------------------
-#define Help_QueueMessageOnce_inLobby_ADDROF 0x005CAA98
-#define Help_QueueMessageOnce_inGame_ADDROF  0x004E5708
+#define Help_QueueMessage_inLobby_ADDROF        0x005CA8F8
+#define Help_QueueMessage_inGame_ADDROF         0x004E5490
+#define Help_QueueMessageOnce_inLobby_ADDROF    0x005CAA98
+#define Help_QueueMessageOnce_inGame_ADDROF     0x004E5708
 
 //--------------------------------------------------------
 //------------------------- GAME -------------------------

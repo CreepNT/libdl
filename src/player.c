@@ -3,7 +3,9 @@
 #include "team.h"
 #include "game.h"
 
-void internal_playerSetPosRot(Player *, VECTOR, VECTOR, int, int, int, int, int);
+void Hero_Warp(Player *this, VECTOR pos, VECTOR rot, int warpToState, int CameraCut, int resetPadRing, int resurrecting, int dropFlag);
+
+//TODO: port me
 
 /*
  * 
@@ -101,7 +103,7 @@ int playerIdIsLocal(int playerId)
 //--------------------------------------------------------------------------------
 void playerSetPosRot(Player * player, VECTOR p, VECTOR r)
 {
-    internal_playerSetPosRot(player, p, r, 0, 1, 1, 1, 1);
+    Hero_Warp(player, p, r, 0, 1, 1, 1, 1);
 }
 
 //--------------------------------------------------------------------------------

@@ -1,5 +1,6 @@
 #include "radar.h"
 
+//TODO: port me
 #define RADAR_BLIPS_START                       ((RadarBlip*)0x0030F020)
 
 int internal_uiDialog(void *, const char *, const char *, int, int, int, int);

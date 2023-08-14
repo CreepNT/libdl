@@ -4,6 +4,7 @@
 #include "help.h"
 #include "string.h"
 
+//TODO: port me
 
 /*
  * Points to the active game settings.

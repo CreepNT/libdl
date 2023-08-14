@@ -1,8 +1,8 @@
 /***************************************************
- * FILENAME :		sound.h
+ * FILENAME :		dialog.h
  * 
  * DESCRIPTION :
- * 		Contains sound specific offsets and structures for Deadlocked.
+ * 
  * 
  * NOTES :
  * 
@@ -92,7 +92,8 @@ enum DialogIds
     
 };
 
-void dialogPlaySound(int dialogId, int arg2);
-
+bool dialogPlaySound(int dialogId);
+bool dialogPlaySoundEx(ushort dialogId, ushort flag, ushort priority, void* pMoby, float min_vol, float max_vol, float min_range, float max_range);
+bool dialogPlaySoundOnce(ushort dialogId, ushort flag, int priority);
 
 #endif // _LIBDL_DIALOG_H_

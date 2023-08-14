@@ -1,6 +1,8 @@
 #include "ui.h"
 #include "game.h"
 
+//TODO: port me
+
 #define UI_ACTIVE_ID                            (*(int*)0x003434B8)
 #define UI_DIALOG_A0                            ((void*)0x011C7000)
 

@@ -14,6 +14,8 @@ void music_Transition_inGame(u64, u64, u64, u64);
 void music_Transition_inLobby(u64, u64, u64, u64);
 void wad_GetSectors(u64, u64, u64);
 
+//TODO: port me
+
 /*
  * Games music volume setting.
  */

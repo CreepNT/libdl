@@ -2,19 +2,19 @@
 #include "game.h"
 
 // 
-char * internal_helpGetString_inGame(int);
-char * internal_helpGetString_inLobby(int);
+char * msg_string_inGame(int);
+char * msg_string_inLobby(int);
 
 //--------------------------------------------------------
 char * helpGetString(int stringId)
 {
   if (isInGame())
   {
-      return internal_helpGetString_inGame(stringId);
+      return msg_string_inGame(stringId);
   }
   else if (isInMenus())
   {
-      return internal_helpGetString_inLobby(stringId);
+      return msg_string_inLobby(stringId);
   }
 
   return NULL;

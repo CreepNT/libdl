@@ -11,20 +11,22 @@
 //--------------------------------------------------------
 //------------------------ COLOR -------------------------
 //--------------------------------------------------------
-#define FastTweenColor_inGame_ADDROF 0x004d75e0         //Real name is FastTweenColor
+#define FastTweenColor_inGame_ADDROF 0x004d75e0
 #define FastTweenColor_inLobby_ADDROF 0x005bd140
 
 //--------------------------------------------------------
 //------------------------ DIALOG ------------------------
 //--------------------------------------------------------
+#define Help_QueueMessage_inLobby_ADDROF 0x005C9638
+#define Help_QueueMessage_inGame_ADDROF 0x004E3688
 #define Help_QueueMessageOnce_inLobby_ADDROF 0x005C97D8
 #define Help_QueueMessageOnce_inGame_ADDROF 0x004E3900
 
 //--------------------------------------------------------
 //------------------------- GAME -------------------------
 //--------------------------------------------------------
-#define GB_GameControllerSessionMasterEndGame_ADDROF 0x006228C8 //GB_GameControllerSessionMasterEndGame
-#define gameScoreboardSetTeamScore_ADDROF 0x005425d0 //GuiMain_SetMPTeamScore
+#define GB_GameControllerSessionMasterEndGame_ADDROF 0x006228C8
+#define gameScoreboardSetTeamScore_ADDROF 0x005425d0
 
 //--------------------------------------------------------
 //----------------------- GRAPHICS -----------------------
@@ -93,7 +95,7 @@
 #define playerRespawn_ADDROF 0x005E2940
 #define playerDropFlag_ADDROF 0x005F05E8
 #define playerGetFromUID_ADDROF 0x005cd480
-#define internal_playerSetPosRot_ADDROF 0x005EB448
+#define Hero_Warp_ADDROF 0x005EB448
 #define playerIncHealth_ADDROF 0x005D1140
 #define playerDecHealth_ADDROF 0x005D1038
 #define playerGetFromSlot_ADDROF 0x005cd3d0

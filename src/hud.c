@@ -2,6 +2,8 @@
 #include "game.h"
 #include <tamtypes.h>
 
+//TODO: port me
+
 /*
  * Player 1's hud.
  */

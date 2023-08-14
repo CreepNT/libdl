@@ -4,6 +4,8 @@
 #include "game.h"
 #include "string.h"
 
+//TODO: port me
+
 /*
  * Address of spawn pack function.
  * This will be patched so that it exits right away and no pack is spawned.

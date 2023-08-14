@@ -45,7 +45,7 @@ int gfxWorldSpaceToScreenSpace(VECTOR position, int * x, int * y)
 
         // check we're facing the position
         "vmaxw.xyzw $vf6, $vf0, $vf0w   \n"
-        "lui        $t0, 0x22           \n"
+        "lui        $t0, 0x22           \n" //?is this an hardcoded address?
         "lw         $t2, -0x2264($t0)   \n"
         "lui        $t0, 0x23           \n"
         "li         $t1, 0x470          \n"
